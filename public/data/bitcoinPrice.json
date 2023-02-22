@@ -1,0 +1,33 @@
+{
+  "id": "btc-bitcoin",
+  "name": "Bitcoin",
+  "symbol": "BTC",
+  "rank": 1,
+  "circulating_supply": 19298731,
+  "total_supply": 19298731,
+  "max_supply": 21000000,
+  "beta_value": 0.993677,
+  "first_data_at": "2010-07-17T00:00:00Z",
+  "last_updated": "2023-02-22T13:30:26Z",
+  "quotes": {
+    "USD": {
+      "price": 24083.99711965207,
+      "volume_24h": 17069953527.131588,
+      "volume_24h_change_24h": -32.05,
+      "market_cap": 464790581817,
+      "market_cap_change_24h": -2.27,
+      "percent_change_15m": 0.1,
+      "percent_change_30m": -0.24,
+      "percent_change_1h": -0.51,
+      "percent_change_6h": 0.2,
+      "percent_change_12h": -1.03,
+      "percent_change_24h": -2.27,
+      "percent_change_7d": 6.17,
+      "percent_change_30d": 4.98,
+      "percent_change_1y": -38.15,
+      "ath_price": 68692.13703693185,
+      "ath_date": "2021-11-10T16:50:00Z",
+      "percent_from_price_ath": -64.94
+    }
+  }
+}
