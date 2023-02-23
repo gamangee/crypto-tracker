@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import styled from 'styled-components';
 import { fetchCoins } from '../api';
 
@@ -119,6 +119,11 @@ export default function Coins() {
   );
   return (
     <Container>
+      <HelmetProvider>
+        <Helmet>
+          <title>Coin Lists</title>
+        </Helmet>
+      </HelmetProvider>
       <Header>
         <Title>코인</Title>
       </Header>
