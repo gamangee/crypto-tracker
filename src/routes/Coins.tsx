@@ -3,6 +3,9 @@ import { useQuery } from 'react-query';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import styled from 'styled-components';
 import { fetchCoins } from '../api';
+import Mode from './components/Mode';
+import { useSetRecoilState } from 'recoil';
+import { isDarkAtom } from '../recoil/atoms';
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -112,7 +115,8 @@ export default function Coins() {
   //     setLoading(false);
   //   })();
   // }, []);
-
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
   const { isLoading: loading, data } = useQuery<ICoin[]>(
     'allCoins',
     fetchCoins
@@ -124,8 +128,10 @@ export default function Coins() {
           <title>Coin Lists</title>
         </Helmet>
       </HelmetProvider>
+      <Mode />
       <Header>
         <Title>코인</Title>
+        <button onClick={toggleDarkAtom}>Toggle Mode</button>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
