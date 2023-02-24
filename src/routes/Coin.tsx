@@ -215,6 +215,7 @@ const OverviewItem = styled.div`
   width: 30%;
   padding: 30px;
   border-radius: 10px;
+  word-break: break-all;
 
   span:first-child {
     color: ${(props) => props.theme.accentColor};
