@@ -86,6 +86,7 @@ function Coin() {
       refetchInterval: 5000,
     }
   );
+
   const loading = infoLoading || tickersLoading;
 
   return (
@@ -97,38 +98,48 @@ function Coin() {
           </title>
         </Helmet>
       </HelmetProvider>
+      <Link to='/'>
+        <Nav>이전으로 돌아가기 ↩</Nav>
+      </Link>
       <Header>
         <Title>
-          {state?.name ? state.name : loading ? 'Loading...' : infoData?.name}
+          {state?.name
+            ? state.name.toUpperCase()
+            : loading
+            ? 'Loading...'
+            : infoData?.name}
         </Title>
       </Header>
-      {loading ? (
-        <Loader>Loading...</Loader>
-      ) : (
+      {loading && <Loader>Loading...</Loader>}
+      {!loading && (
         <>
           <Overview>
             <OverviewItem>
-              <span>Rank:</span>
+              <span>Rank</span>
               <span>{infoData?.rank}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Symbol:</span>
-              <span>${infoData?.symbol}</span>
+              <span>Type</span>
+              <span>{infoData?.type.toUpperCase()}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Price:</span>
-              <span>${tickersData?.quotes.USD.price.toFixed(2)}</span>
+              <span>Symbol</span>
+              <span>${infoData?.symbol}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
           <Overview>
             <OverviewItem>
-              <span>Total Suply:</span>
-              <span>{tickersData?.total_supply}</span>
+              <span>Price</span>
+              <span>${tickersData?.quotes.USD.price.toFixed(2)}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Max Supply:</span>
-              <span>{tickersData?.max_supply}</span>
+              <span>Total Suply</span>
+              <span>{tickersData?.total_supply.toLocaleString()}</span>
+            </OverviewItem>
+            <OverviewItem>
+              <span>Max Supply</span>
+              <span>{tickersData?.max_supply.toLocaleString()}</span>
             </OverviewItem>
           </Overview>
           <Tabs>
@@ -147,9 +158,38 @@ function Coin() {
 }
 export default Coin;
 
+const Container = styled.div`
+  max-width: 600px;
+  margin: 0 auto;
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 30px;
+  color: #95a5a6;
+  font-weight: 800;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+`;
+
 const Title = styled.h1`
-  font-size: 48px;
-  color: ${(props) => props.theme.accentColor};
+  color: ${(props) => props.theme.textColor};
+  text-align: center;
+  font-size: 45px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
 `;
 
 const Loader = styled.span`
@@ -157,39 +197,35 @@ const Loader = styled.span`
   display: block;
 `;
 
-const Container = styled.div`
-  padding: 0px 20px;
-  max-width: 480px;
-  margin: 0 auto;
-`;
-
-const Header = styled.header`
-  height: 15vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px 20px;
-  border-radius: 10px;
+  margin-top: 20px;
 `;
+
 const OverviewItem = styled.div`
+  background-color: ${(props) => props.theme.listBgColor};
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 30%;
+  padding: 30px;
+  border-radius: 10px;
+
   span:first-child {
-    font-size: 10px;
-    font-weight: 400;
+    color: ${(props) => props.theme.accentColor};
+    font-size: 12px;
     text-transform: uppercase;
     margin-bottom: 5px;
   }
+
+  span:last-child {
+    font-size: 25px;
+    font-weight: 800;
+  }
 `;
 const Description = styled.p`
-  margin: 20px 0px;
+  margin: 20px 0px 50px;
 `;
 
 const Tabs = styled.div`
@@ -200,15 +236,16 @@ const Tabs = styled.div`
 `;
 
 const Tab = styled.span<{ isActive: boolean }>`
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 7px 0px;
-  border-radius: 10px;
+  background-color: ${(props) => props.theme.listBgColor};
   color: ${(props) =>
     props.isActive ? props.theme.accentColor : props.theme.textColor};
+  padding: 20px 0px;
+  border-radius: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 400;
+
   a {
     display: block;
   }

@@ -7,6 +7,7 @@ import router from './Router';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { useRecoilValue } from 'recoil';
 import { isDarkAtom } from './recoil/atoms';
+import StatusBar from './routes/components/StatusBar';
 
 function App() {
   const isDark = useRecoilValue(isDarkAtom);
@@ -15,6 +16,7 @@ function App() {
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
+        <StatusBar />
         <RouterProvider router={router} />
         <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>

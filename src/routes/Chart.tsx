@@ -5,6 +5,7 @@ import { fetchCoinHistory } from '../api';
 import ApexChart from 'react-apexcharts';
 import { useRecoilValue } from 'recoil';
 import { isDarkAtom } from '../recoil/atoms';
+import styled from 'styled-components';
 
 interface ChartProps {
   coinId: string;
@@ -33,9 +34,8 @@ export default function Chart() {
 
   return (
     <div>
-      {isLoading ? (
-        'Loading chart...'
-      ) : (
+      {isLoading && <Loader>Loading...</Loader>}
+      {!isLoading && (
         <ApexChart
           type='line'
           series={[
@@ -87,3 +87,8 @@ export default function Chart() {
     </div>
   );
 }
+
+const Loader = styled.span`
+  text-align: center;
+  display: block;
+`;
