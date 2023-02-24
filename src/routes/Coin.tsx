@@ -88,8 +88,6 @@ function Coin() {
       refetchInterval: 5000,
     }
   );
-  console.log('infoData', infoData);
-  console.log('tickersData', tickersData);
 
   const loading = infoLoading || tickersLoading;
 
@@ -148,10 +146,13 @@ function Coin() {
           </Overview>
           <Tabs>
             <Tab isActive={chartMatch !== null}>
-              <Link to={`/${coinId}/chart`}>Chart</Link>
+              <Link to={`/coin/${coinId}/chart`}>Chart</Link>
             </Tab>
             <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinId}/price`} state={{ priceData: tickersData }}>
+              <Link
+                to={`/coin/${coinId}/price`}
+                state={{ priceData: tickersData }}
+              >
                 Price
               </Link>
             </Tab>

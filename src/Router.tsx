@@ -4,15 +4,18 @@ import Chart from './routes/Chart';
 import Coin from './routes/Coin';
 import Coins from './routes/Coins';
 import Price from './routes/Price';
+import Error from './routes/components/Error';
 
 const router = createBrowserRouter([
   {
     path: '/crypto-tracker',
     element: <Coins />,
+    errorElement: <Error />,
   },
   {
-    path: '/:coinId',
+    path: '/coin/:coinId',
     element: <Coin />,
+    errorElement: <Error />,
     children: [
       {
         path: 'chart',

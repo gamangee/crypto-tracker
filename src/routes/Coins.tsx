@@ -31,7 +31,7 @@ export default function Coins() {
         <CoinsList>
           {data?.slice(0, 96).map((coin) => (
             <Coin key={coin.id}>
-              <Link to={`/${coin.id}`} state={{ name: coin.name }}>
+              <Link to={`/coin/${coin.id}`} state={{ name: coin.name }}>
                 <Img
                   src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
                 />

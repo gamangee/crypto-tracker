@@ -30,6 +30,8 @@ export default function Chart() {
     fetchCoinHistory(`${coinId}`)
   );
 
+  console.log('data', data);
+
   interface CandleStickProps {
     data: {
       x: number;
