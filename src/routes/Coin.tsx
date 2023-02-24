@@ -102,7 +102,7 @@ function Coin() {
           </title>
         </Helmet>
       </HelmetProvider>
-      <Link to='/'>
+      <Link to='/crypto-tracker'>
         <Nav>이전으로 돌아가기 ↩</Nav>
       </Link>
       <Header>
