@@ -12,13 +12,13 @@ interface ChartProps {
 }
 
 interface IHistorical {
-  time_open: string;
-  time_close: string;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  volume: number;
+  time_open: number;
+  time_close: number;
+  open: string;
+  high: string;
+  low: string;
+  close: string;
+  volume: string;
   market_cap: number;
 }
 
@@ -30,19 +30,26 @@ export default function Chart() {
     fetchCoinHistory(`${coinId}`)
   );
 
-  console.log(isLoading, data);
+  interface CandleStickProps {
+    data: {
+      x: number;
+      y: string[];
+    }[];
+  }
 
   return (
     <div>
       {isLoading && <Loader>Loading...</Loader>}
       {!isLoading && (
         <ApexChart
-          type='line'
+          type='candlestick'
           series={[
             {
-              name: 'Price',
-              data: data?.map((price) => price.close) as number[],
-            },
+              data: data?.map((price) => ({
+                x: price.time_close,
+                y: [price.open, price.high, price.low, price.close],
+              })),
+            } as CandleStickProps,
           ]}
           options={{
             theme: {
@@ -59,7 +66,7 @@ export default function Chart() {
             grid: { show: false },
             stroke: {
               curve: 'smooth',
-              width: 4,
+              width: 3,
             },
             yaxis: {
               show: false,
@@ -71,11 +78,14 @@ export default function Chart() {
               type: 'datetime',
               categories: data?.map((price) => price.time_close),
             },
-            fill: {
-              type: 'gradient',
-              gradient: { gradientToColors: ['#0be881'], stops: [0, 100] },
+            plotOptions: {
+              candlestick: {
+                colors: {
+                  upward: '#FE5A75',
+                  downward: '#019FD4',
+                },
+              },
             },
-            colors: ['#0fbcf9'],
             tooltip: {
               y: {
                 formatter: (value) => `$${value.toFixed(2)}`,

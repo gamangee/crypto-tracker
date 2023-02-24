@@ -8,6 +8,7 @@ import styled from 'styled-components';
 interface RouteParams {
   coinId: string;
 }
+
 interface RouteState {
   state: {
     name: string;
@@ -79,6 +80,7 @@ function Coin() {
     ['info', coinId],
     () => fetchCoinInfo(coinId!)
   );
+
   const { isLoading: tickersLoading, data: tickersData } = useQuery<PriceData>(
     ['tickers', coinId],
     () => fetchCoinTickers(coinId!),
@@ -147,7 +149,9 @@ function Coin() {
               <Link to={`/${coinId}/chart`}>Chart</Link>
             </Tab>
             <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinId}/price`}>Price</Link>
+              <Link to={`/${coinId}/price`} state={{ priceData: tickersData }}>
+                Price
+              </Link>
             </Tab>
           </Tabs>
           <Outlet context={coinId} />

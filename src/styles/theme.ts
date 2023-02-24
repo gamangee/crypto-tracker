@@ -9,7 +9,6 @@ export const darkTheme: DefaultTheme = {
   gradientColor: 'rgb(154,67,162)',
   linearColor:
     'linear-gradient(90deg, rgba(154,67,162,1) 0%, rgba(37,20,128,1) 100%)',
-  // cardBgColor: 'transparent',
 };
 
 export const lightTheme: DefaultTheme = {
@@ -21,5 +20,4 @@ export const lightTheme: DefaultTheme = {
   gradientColor: 'rgb(255,189,0)',
   linearColor:
     'linear-gradient(90deg, rgba(255,189,0,1) 0%, rgba(208,105,87,1) 100%)',
-  // cardBgColor: 'white',
 };
