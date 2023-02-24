@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import { fetchCoins } from '../api';
 
 interface ICoin {
-  id: string;
-  name: string;
-  symbol: string;
+  id?: string;
+  name?: string;
+  symbol?: string;
 }
 
 export default function Coins() {
